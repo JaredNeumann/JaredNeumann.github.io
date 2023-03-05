@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-.main {
+main {
     background-color: lightgoldenrodyellow;
     width: 100%;
     min-width: 100vh;
