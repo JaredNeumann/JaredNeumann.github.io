@@ -24,6 +24,32 @@
             </div>
         </div>
     </div>
+    <div class="spotify">
+        <h1>Currently Playing on Spotify:</h1>
+        <script>
+            const CLIENT_ID = 'dd9dc71c2bc5419797aec38fb098cc6e';
+            const REDIRECT_URI = 'https://jaredneumann.github.io/';
+            const SCOPES = ['user-read-currently-playing'];
+            const API_URL = 'https://api.spotify.com/v1/me/player/currently-playing';
+
+            // Get the access token from the URL fragment
+            const params = new URLSearchParams(window.location.hash.substring(1));
+            const accessToken = params.get('access_token');
+
+            // Make an HTTP GET request to the currently playing endpoint
+            fetch(API_URL, {
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the current track div with the song name and artist name
+                    document.getElementById('spotify').innerHTML = `${data.item.name} by ${data.item.artists[0].name}`;
+                })
+                .catch(error => console.error(error));
+        </script>
+    </div>
 </body>
 
 </html>
